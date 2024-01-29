@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Data</title>
+  </head>
+  <body>
+    <form id="form">
+      <input type="text" name="brandName" />
+      <input type="file" name="brandPhoto" id="file" />
+      <button name="intent" value="submit">Submit</button>
+    </form>
+
+    <script>
+      const fileInput = document.getElementById("file");
+      const form = document.getElementById("form");
+      const formData = new FormData();
+
+      const handleChangeInput = (event) => {
+        formData.append("brandPhoto", event.target.files[0]);
+        formData.append("brandName", "New Brand");
+      };
+
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+          const response = await fetch(
+            "http://127.0.0.1:5000/api/v1/brand/add",
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+
+      fileInput.addEventListener("change", handleChangeInput);
+      form.addEventListener("submit", handleSubmit);
+    </script>
+  </body>
+</html>

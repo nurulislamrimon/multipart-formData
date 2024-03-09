@@ -13,6 +13,9 @@
     </form>
 
     <script>
+      const accessToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJwREhKeGM4UEY4IiwiX2lkIjoiNjViZTNmYTZhNDlkOTRjZWM3MDQ3M2Y1IiwiZnVsbE5hbWUiOiJOIEkgUmltb24iLCJyb2xlIjoiQWRtaW4iLCJwaG9uZU51bWJlciI6IjAxNzE1NDk0ODQ2IiwiaXNQaG9uZU51bWJlclZlcmlmaWVkIjp0cnVlLCJpc0VtYWlsVmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE3MDk5NjE4NDksImV4cCI6MTcxMDA0ODI0OX0.7yxGR1OyHX0KCudPZ8_4DzQC_iJVFK4dtPYNCHFPRAw";
+
       const fileInput = document.getElementById("file");
       const form = document.getElementById("form");
       const formData = new FormData();
@@ -29,6 +32,9 @@
             "http://127.0.0.1:5000/api/v1/brand/add",
             {
               method: "POST",
+              headers: {
+                authorization: "bearer " + accessToken,
+              },
               body: formData,
             }
           );
